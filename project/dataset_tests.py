@@ -3,6 +3,7 @@ valid_option = False
 test_a = [10, 20, 30, 40, 50]
 test_b =[40, 41, 39, 42, 40, 38, 41, 43, 39, 40, 42, 41, 37, 40, 39, 42, 41, 38, 40, 43]
 test_c = [40, 42, 39, 100, 41, 38, 43, 40, 42, 39, 41, 38, 40, 42, 39, 41, 100, 40, 38, 42, 41, 39, 40, 43, 38]
+custom = [1, 3, 4, 5, 6, 7, 8, 11, 13, 14]
 unusual_readings = 0
 below_20 = 0
 above_60 = 0
@@ -22,7 +23,7 @@ def unusual_percent(dataset):
 # Loop which allows for re-entry of set choosing
 while valid_option == False:
     # Asks the user which dataset they'd like to use
-    set_option = input("Choose which dataset you want to use (a, b, or c): ")
+    set_option = input("Choose which dataset you want to use (a, b, c, or custom): ")
     # Chooses the dataset based on user input
     if set_option == "a":
         dataset = test_a
@@ -33,19 +34,41 @@ while valid_option == False:
     elif set_option == "c":
         dataset = test_c
         valid_option = True
+    elif set_option == "custom":
+        dataset = custom
+        valid_option = True
     else:
         print("Please choose a valid option.")
 
-# Prints all information
-print("Import Report:")
-print("----------")
-print(f"# of Readings: {len(dataset)}")
-print(f"First Reading: {dataset[0]}")
-print(f"Last Reading: {dataset[-1]}")
-print(f"Minimum: {min(dataset)}")
-print(f"Maximum: {max(dataset)}")
-print(f"Average: {avg_val(dataset)}")
-print(f"Below 20: {below_20}")
-print(f"Above 60: {above_60}")
-print(f"Unusual Readings: {unusual_readings}")
-print(f"Unusual Reading %: {unusual_percent(dataset)}")
+# Calculates how many even or odd numbers are in the dataset, and returns the values as a tuple
+def even_or_odd(custom):
+    evens = 0
+    odds = 0
+    for data in custom:
+        if data % 2 == 0:
+            evens += 1
+        else:
+            odds += 1
+    return evens, odds
+
+# Unwraps the tuple so the values can be printed using variables
+evens, odds = even_or_odd(dataset)
+
+# Prints all information for sets a, b, and c
+if dataset != custom:
+    print("Import Report:")
+    print("----------")
+    print(f"# of Readings: {len(dataset)}")
+    print(f"First Reading: {dataset[0]}")
+    print(f"Last Reading: {dataset[-1]}")
+    print(f"Minimum: {min(dataset)}")
+    print(f"Maximum: {max(dataset)}")
+    print(f"Average: {avg_val(dataset)}")
+    print(f"Below 20: {below_20}")
+    print(f"Above 60: {above_60}")
+    print(f"Unusual Readings: {unusual_readings}")
+    print(f"Unusual Reading %: {unusual_percent(dataset)}")
+# Prints information for custom dataset
+else:
+    print(f"Evens: {evens}")
+    print(f"Odds: {odds}")
