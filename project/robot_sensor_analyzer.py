@@ -19,17 +19,17 @@ def unusual_percent(readings):
     return (100 * (unusual_readings / len(readings)))
 
 # Opens the .csv file and stores it within the empty list
-with open('Robot_Sensor_Readings_1000.csv', 'r') as file:
+with open('project/Robot_Sensor_Readings_1000.csv', 'r') as file:
     reader = csv.DictReader(file)
     for row in reader:
         readings.append(float(row["distance_cm"]))
         if readings[-1] < 20 or readings[-1] > 60:
             # Adds to the unusual readings count
             unusual_readings += 1
-        elif readings[-1] < 20:
+        if readings[-1] < 20:
             # Adds to the below 20 count
             below_20 += 1
-        elif readings[-1] > 60:
+        if readings[-1] > 60:
             # Adds to the above 60 count
             above_60 += 1
 
@@ -46,3 +46,13 @@ print(f"Below 20: {below_20}")
 print(f"Above 60: {above_60}")
 print(f"Unusual Readings: {unusual_readings}")
 print(f"Unusual Reading %: {unusual_percent(readings)}")
+
+# Debugging Challenge 1
+# print(type(row["distance_cm"]))
+# print(type(float(row["distance_cm"])))
+
+# Groups of 100 Analyzing
+for start in range(0, len(readings), 100):
+    group = readings[start:start + 100]
+    print("Group:", start + 1, "to", start + len(group))
+    print("Average:", sum(group) / len(group))
