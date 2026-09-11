@@ -1,5 +1,6 @@
 # CSV data extraction
-A coding project to understand the basics of using .csv files with Python.
+## A coding project to understand the basics of using .csv files with Python.
+
 <img width="1310" height="1508" alt="robot sensor data for readme" src="https://github.com/user-attachments/assets/5697ee4f-e294-401a-8beb-0bab7d5b9755" />
 
 # How to Use:
