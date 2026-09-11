@@ -1,31 +1,39 @@
 import csv
 
+# Initial variables and empty list
 readings = []
 unusual_readings = 0
 below_20 = 0
 above_60 = 0
 
+# Calculates the average of the values in the dataset
 def avg_val(readings):
     if len(readings) == 0:
         return 0
     return sum(readings) / len(readings)
 
+# Calculates the unusual readings of the values in the dataset
 def unusual_percent(readings):
     if len(readings) == 0:
         return 0
     return (100 * (unusual_readings / len(readings)))
 
+# Opens the .csv file and stores it within the empty list
 with open('Robot_Sensor_Readings_1000.csv', 'r') as file:
     reader = csv.DictReader(file)
     for row in reader:
         readings.append(float(row["distance_cm"]))
         if readings[-1] < 20 or readings[-1] > 60:
+            # Adds to the unusual readings count
             unusual_readings += 1
-        if readings[-1] < 20:
+        elif readings[-1] < 20:
+            # Adds to the below 20 count
             below_20 += 1
-        if readings[-1] > 60:
-                    above_60 += 1
+        elif readings[-1] > 60:
+            # Adds to the above 60 count
+            above_60 += 1
 
+# Prints all information
 print("Import Report:")
 print("----------")
 print(f"# of Readings: {len(readings)}")
