@@ -28,7 +28,7 @@ with open('project/Robot_Sensor_Readings_1000.csv', 'r') as file:
             # Adds to the unusual readings count
             unusual_readings += 1
             # Saves the reading_id of the unusual reading
-            unusual_readings_ids.append(row["distance_cm"])
+            unusual_readings_ids.append(row["reading_id"])
         if readings[-1] < 20:
             # Adds to the below 20 count
             below_20 += 1
