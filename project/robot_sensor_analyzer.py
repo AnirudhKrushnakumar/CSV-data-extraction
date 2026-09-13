@@ -2,6 +2,7 @@ import csv
 
 # Initial variables and empty list
 readings = []
+unusual_readings_ids = []
 unusual_readings = 0
 below_20 = 0
 above_60 = 0
@@ -26,6 +27,8 @@ with open('project/Robot_Sensor_Readings_1000.csv', 'r') as file:
         if readings[-1] < 20 or readings[-1] > 60:
             # Adds to the unusual readings count
             unusual_readings += 1
+            # Saves the reading_id of the unusual reading
+            unusual_readings_ids.append(row["distance_cm"])
         if readings[-1] < 20:
             # Adds to the below 20 count
             below_20 += 1
@@ -46,6 +49,7 @@ print(f"Below 20: {below_20}")
 print(f"Above 60: {above_60}")
 print(f"Unusual Readings: {unusual_readings}")
 print(f"Unusual Reading %: {unusual_percent(readings)}")
+print(f"Unusual Reading IDs: {unusual_readings_ids}")
 
 # Debugging Challenge 1
 # print(type(row["distance_cm"]))
